@@ -1,4 +1,5 @@
 import { CORE_CONCEPTS, EXAMPLES } from './data.js';
+import { products } from './products.js';
 import { useState } from 'react';
 
 import Welcome from './components/Welcome.jsx';
@@ -8,6 +9,21 @@ import Card from './components/Card.jsx';
 import TabButton from './components/TabButton.jsx';
 import Footer from './components/Footer.jsx';
 import FragmentEle from './components/FragmentEle.jsx';
+import List from './components/List.jsx';
+import Embedjs from './components/Embedjs.jsx';
+import Warning from './components/Warning.jsx';
+import Avatar from './components/Avatar.jsx';
+import Bio from './components/Bio.jsx';
+import Salary from './components/Salary.jsx';
+import Badge from './components/Badge.jsx';
+import Product from './components/Product.jsx';
+import Category from './components/Category.jsx';
+import Icon from './components/Icon.jsx';
+import Modal from './components/Modal.jsx';
+import Wrapper from './components/Wrapper.jsx';
+import Section from './components/Section.jsx';
+import Form from './components/Form.jsx';
+import Counter from './components/Counter.jsx';
 
 function Feature() {
   return (
@@ -27,10 +43,34 @@ function Feature() {
 function Main() {
 
   const [tabContent, setTabContent] = useState('components');
+  const categories = ["Electronics", "Clothing", "Shoes", "Books"];
+  const users = [{
+    id: 1,
+    name: "Mashoor"
+  }, {
+    id: 2,
+    name: "Hum"
+  }, {
+    id: 3,
+    name: "Hai"
+  }, {
+    id: 4,
+    name: "Yum"
+  }, {
+    id: 5,
+    name: "Gulati"
+  }];
+
 
   function handleSelect(selectButton) {
     setTabContent(selectButton);
     console.log(tabContent);
+  }
+
+  function formatAsUSD(value) {
+    const usd = `$${value.toFixed(2)}`;
+    console.log(usd);
+    return usd;
   }
 
   return (
@@ -58,7 +98,51 @@ function Main() {
       </div>
       <h3 className="text-3xl font-bold mt-5 pb-5">Components Practices</h3>
       <Welcome />
-      <FragmentEle/>
+      <FragmentEle />
+      <List />
+      <Embedjs />
+      <Warning />
+      <Avatar buttonName="Edit" />
+      <Bio name="Mashoor Gulati" description="People's laughing reason" occupation="Comedian" />
+      <Salary formatSalary={formatAsUSD(4500)} />
+      <Badge text="Warning" />
+      <Badge text="Danger" />
+      <h2>Available Products</h2>
+      <div onMouseEnter={() => console.log("Hovering!")} className="grid grid-cols-4 gap-4">
+        {products.filter((product) => product.inStock === true).map((product) => (
+          <Product key={product.name} {...product} >Nothing to show.Please scroll down.</Product>
+        ))}
+      </div>
+      <h2>Asc. Products</h2>
+      {/* <div className="grid grid-cols-4 gap-4">
+        {products.sort((a, b) => a.price - b.price).map((product) => (
+          <Product key={product.name} {...product} />
+        ))}
+      </div> */}
+      <h2>Products</h2>
+      {/* <div className="grid grid-cols-4 gap-4">
+        {products.length === 0 ? (
+          <p>No Items</p>
+        ) : (
+          products.map((product) => (
+            <Product key={product.name} {...product} />
+          ))
+        )}
+      </div> */}
+      <ul>
+        <Category categories={categories} />
+      </ul>
+      <Icon width="w-10" height="w-10">🎲</Icon>
+      <Icon width="w-10" height="w-10">🙌</Icon>
+      <Modal modalHeading="Demo Modal" modalTitle="Modal Title">This is the demo modal. Nothing else you find here. Get lost.</Modal>
+      <Wrapper>
+        {users.map((user) => (<li key={user.id}>{user.id},{user.name}</li>))}
+      </Wrapper>
+      <Section heading="Next Section">Wait till</Section>
+      <Form formHeading="Demo Form" /><br />
+      <Counter />
+      <button className="bg-amber-200 p-4 cursor-pointer" onClick={() => formatAsUSD(4500)}>Hit Me!, Check Console</button>
+      <button className="bg-amber-300 p-4 cursor-pointer" onClick={() => formatAsUSD(3000)}>USD</button>
       <Footer />
     </main >
   );
