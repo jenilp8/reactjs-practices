@@ -1,13 +1,24 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 function Counter() {
     const [count, setCount] = useState(0);
+
     function updateCount() {
         return setCount(count + 1);
     }
+
     function resetCount() {
         return setCount(0);
     }
+
+    useEffect(() => {
+        console.log("Count is updated by 1 times:" + count)
+        return () => {
+            console.log("counter is detached")
+        };  
+    })
+
     return (
         <>
             <div>

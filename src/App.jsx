@@ -1,6 +1,7 @@
 import { CORE_CONCEPTS, EXAMPLES } from './data.js';
 import { products } from './products.js';
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import Welcome from './components/Welcome.jsx';
 import Header from './components/Header.jsx';
@@ -24,6 +25,7 @@ import Wrapper from './components/Wrapper.jsx';
 import Section from './components/Section.jsx';
 import Form from './components/Form.jsx';
 import Counter from './components/Counter.jsx';
+import Accordian from './components/Accordian.jsx';
 
 function Feature() {
   return (
@@ -143,6 +145,15 @@ function Main() {
       <Counter />
       <button className="bg-amber-200 p-4 cursor-pointer" onClick={() => formatAsUSD(4500)}>Hit Me!, Check Console</button>
       <button className="bg-amber-300 p-4 cursor-pointer" onClick={() => formatAsUSD(3000)}>USD</button>
+      <Accordian accordianTitle="Accordian 1" accordianBody="jksvbds skvdss is vdvskvdv vsv sivdv dvsdivvid vsvish v" />
+      <Accordian accordianTitle="Accordian 2" accordianBody="bvbjdksvsdvbksdbvsdbs s vkjsd dsk ks vs vs vsvk vsk vsdk vs vsk vks  " />
+      <div>
+        <p>This child is placed in the parent div.</p>
+        {createPortal(
+          <p>This child is placed in the document body.</p>,
+          document.body
+        )}
+      </div>
       <Footer />
     </main >
   );
